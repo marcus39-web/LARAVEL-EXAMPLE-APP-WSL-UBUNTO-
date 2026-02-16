@@ -1,0 +1,16 @@
+{
+    "name": "root/html",
+    "autoload": {
+        "psr-4": {
+            "Root\\Html\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marcus Reiser"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^3.10"
+    }
+}
