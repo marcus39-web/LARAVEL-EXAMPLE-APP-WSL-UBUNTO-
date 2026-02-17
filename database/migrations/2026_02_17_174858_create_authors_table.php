@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->text('description');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('status')->default('pending');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('authors');
     }
 };

@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\View;
 
 View::share('appName', config('app.name'));
@@ -51,3 +52,7 @@ Route::post('/products', [ProductController::class, 'store'])->name('products.st
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 Route::resource('posts', PostController::class);
+
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
+Route::get('/authors/create', [AuthorController::class, 'create'])->name('authors.create');
+Route::post('/authors', [AuthorController::class, 'store'])->name('authors.store');

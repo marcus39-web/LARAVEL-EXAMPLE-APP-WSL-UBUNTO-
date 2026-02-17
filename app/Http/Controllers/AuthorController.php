@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Author;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $authors = \App\Models\Author::all();
+        return view('authors.index', compact('authors'));
     }
 
     /**
@@ -20,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('authors.create');
     }
 
     /**
@@ -28,13 +29,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        \App\Models\Author::create($request->only('name'));
+        return redirect()->route('authors.index')->with('success', 'Autor erfolgreich angelegt!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Author $author)
     {
         //
     }
@@ -42,7 +47,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(Author $author)
     {
         //
     }
@@ -50,7 +55,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Author $author)
     {
         //
     }
@@ -58,7 +63,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Author $author)
     {
         //
     }
