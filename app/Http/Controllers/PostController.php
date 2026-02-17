@@ -12,7 +12,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = \App\Models\Post::with(['user', 'tags'])->get();
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -20,7 +21,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $tags = \App\Models\Tag::all();
+        return view('posts.create', compact('tags'));
     }
 
     /**
@@ -28,7 +30,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'tags' => 'array',
+        ]);
+        $user = \App\Models\User::first();
+        if (!$user) {
+            return redirect()->route('posts.create')->withErrors('Kein Benutzer vorhanden!');
+        }
+        $post = \App\Models\Post::create([
+            'user_id' => $user->id,
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+        if ($request->has('tags')) {
+            $post->tags()->sync($request->tags);
+        }
+        return redirect()->route('posts.index')->with('success', 'Beitrag erfolgreich erstellt!');
     }
 
     /**
