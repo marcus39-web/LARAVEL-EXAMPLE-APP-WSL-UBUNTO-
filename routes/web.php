@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\View;
 
 View::share('appName', config('app.name'));
@@ -56,3 +57,9 @@ Route::resource('posts', PostController::class);
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
 Route::get('/authors/create', [AuthorController::class, 'create'])->name('authors.create');
 Route::post('/authors', [AuthorController::class, 'store'])->name('authors.store');
+
+Route::middleware('web')->group(function () {
+    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+    Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+});

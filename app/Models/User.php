@@ -15,4 +15,9 @@ class User extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'task_user');
+    }
 }
