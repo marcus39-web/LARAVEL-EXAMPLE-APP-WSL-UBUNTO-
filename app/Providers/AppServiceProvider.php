@@ -15,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(ReportService::class, function ($app) {
             return new ReportService();
         });
+
+        // Registrierung des MailService
+        $this->app->bind(\App\Services\MailServiceInterface::class, \App\Services\MailService::class);
     }
 
     /**
