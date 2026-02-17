@@ -8,6 +8,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\View;
 
 View::share('appName', config('app.name'));
@@ -48,3 +49,5 @@ Route::post('/contact', [ContactController::class, 'submit']);
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+Route::resource('posts', PostController::class);
