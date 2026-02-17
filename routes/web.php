@@ -7,6 +7,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\View;
 
 View::share('appName', config('app.name'));
@@ -43,3 +44,7 @@ Route::get('/profile', [ProfileController::class, 'showProfile']);
 
 Route::get('/contact', [ContactController::class, 'showForm']);
 Route::post('/contact', [ContactController::class, 'submit']);
+
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
