@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\View;
 
 View::share('appName', config('app.name'));
@@ -63,3 +64,7 @@ Route::middleware('web')->group(function () {
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 });
+
+Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
+Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');

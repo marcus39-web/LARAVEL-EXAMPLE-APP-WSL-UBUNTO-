@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Product catalog')</title>
-    <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; }
-        header { background-color: #007bff; color: white; text-align: center; padding: 20px; }
-        .container { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        input, select, button { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
-        button { background-color: #007bff; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-    </style>
+    <title>@yield('title', 'Banking System')</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>@yield('header', 'Product catalog')</h1>
-    </header>
+<nav class="navbar navbar-dark bg-primary">
     <div class="container">
-        @yield('content')
+        <a class="navbar-brand" href="{{ route('transactions.create') }}">Banking system</a>
     </div>
+</nav>
+<div class="container mt-4">
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @elseif (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+    @yield('content')
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
